@@ -1,3 +1,5 @@
+require 'action_dispatch/middleware/public_exceptions'
+
 module RoutedExceptions
   class SelectivePublic < ActionDispatch::PublicExceptions
     def call(env)

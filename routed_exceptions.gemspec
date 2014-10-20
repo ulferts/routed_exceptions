@@ -9,4 +9,10 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://rubygems.org/gems/routed_exceptions'
   s.license       = 'MIT'
+
+  s.add_dependency 'rack'
+  s.add_dependency 'rails'
+  s.add_development_dependency 'rack-test'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec-rails'
 end

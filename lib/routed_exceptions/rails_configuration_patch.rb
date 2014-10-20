@@ -1,3 +1,6 @@
+require 'rails/application/configuration'
+require 'routed_exceptions/configuration'
+
 module RoutedExceptions
   module RailsConfigurationPatch
     def self.included(base)

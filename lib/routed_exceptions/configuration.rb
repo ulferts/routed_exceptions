@@ -1,3 +1,6 @@
+require 'routed_exceptions/selective_debug'
+require 'routed_exceptions/selective_public'
+
 module RoutedExceptions
   class Configuration
     attr_accessor :non_fatal_routing_errors,
@@ -5,8 +8,9 @@ module RoutedExceptions
                   :application_config
 
     def initialize(application_config)
-      @application_config = application_config
-      @in_app_errors      = []
+      @application_config       = application_config
+      @non_fatal_routing_errors = false
+      @in_app_errors            = []
     end
 
     def non_fatal_routing_errors=(active)
@@ -42,7 +46,7 @@ module RoutedExceptions
     end
 
     def noisy_exceptions
-      self.exceptions_app = ActinDispatch::DebugExceptions.new(Rails.public_path)
+      self.exceptions_app = ActionDispatch::DebugExceptions.new(Rails.public_path)
     end
   end
 end

@@ -1,3 +1,5 @@
+require 'action_dispatch/middleware/debug_exceptions'
+
 module RoutedExceptions
   class SelectiveDebug < ActionDispatch::DebugExceptions
     def log_error(env, wrapper)
