@@ -1,12 +1,22 @@
 require 'action_dispatch/middleware/public_exceptions'
 
 module RoutedExceptions
-  class SelectivePublic < ActionDispatch::PublicExceptions
+  class SelectivePublic
+    attr_accessor :default_handler,
+                  :rails_application
+
+    def initialize(path)
+      @default_handler = ActionDispatch::PublicExceptions.new(path)
+      @rails_application = Rails.application
+
+      self
+    end
+
     def call(env)
       if routed_error?(env)
-        Rails.application.routes.call env
+        rails_application.routes.call env
       else
-        super
+        default_handler.call(env)
       end
     end
 
@@ -21,7 +31,7 @@ module RoutedExceptions
     end
 
     def routed_errors
-      Rails.application.config.routed_exceptions.in_app_errors
+      rails_application.config.routed_exceptions.in_app_errors
     end
   end
 end
